@@ -1,0 +1,150 @@
+Level,Apparatus,Category,Skill,TargetValue,TargetUnitOrMetric
+Bronze,Floor,Basic Shapes,Hollow/Arch/Tight body,,quality
+Bronze,Floor,Rolls,Forward Roll,,quality
+Bronze,Floor,Rolls,Backward Roll,,quality
+Bronze,Floor,Basic Shaped Jumps,Straight Jump,,quality
+Bronze,Floor,Basic Shaped Jumps,Star Jump,,quality
+Bronze,Floor,Basic Shaped Jumps,Tuck Jump,,quality
+Bronze,Floor,Hand/Head Stand,Headstand,20,sec
+Bronze,Floor,Hand/Head Stand,Handstand (wall),20,sec
+Bronze,Floor,Bridge & Candlestick,Bridge,20,sec
+Bronze,Floor,Bridge & Candlestick,Candlestick,20,sec
+Bronze,Floor,Splits,Middle Split,15,sec
+Bronze,Floor,Splits,Front Split (Right),15,sec
+Bronze,Floor,Splits,Front Split (Left),15,sec
+Bronze,Bars,Static Holds,Long Hang,20,sec
+Bronze,Bars,Free Hangs,Tuck Hang,10,sec
+Bronze,Bars,Free Hangs,Straddle Hang,10,sec
+Bronze,Bars,Free Hangs,L-Hang,10,sec
+Bronze,Bars,Sole Hangs,Tuck Sole Hang,10,sec
+Bronze,Bars,Sole Hangs,Straddle Sole Hang,10,sec
+Bronze,Bars,Sole Hangs,Stride Sole Hang,10,sec
+Bronze,Bars,Transitions,Tummy Roll (chin above bar),,quality
+Bronze,Bars,Static Holds,Front Support,20,sec
+Bronze,Bars,Strength,Chin-up Hold,10,sec
+Bronze,Vault,Running Drill,Best Sprint Time,,time
+Bronze,Vault,Hurdle Drill,Form,,quality
+Bronze,Vault,Shaped Jumps,Straight Jump,,quality
+Bronze,Vault,Shaped Jumps,Star Jump,,quality
+Bronze,Vault,Shaped Jumps,Tuck Jump,,quality
+Bronze,Vault,Landings,Stick Count,10,sticks
+Bronze,Beam,Support Positions,Front/Back/Stride Support,,quality
+Bronze,Beam,Walks,F/B/Side + Relevé,,quality
+Bronze,Beam,Balance,One-leg Balance,10,sec
+Bronze,Beam,Scales,Front Scale,10,sec
+Bronze,Beam,Scales,Side (Y) Scale,10,sec
+Silver,Floor,,Cart Wheel - joined legs at the end,,quality
+Silver,Floor,,Backward Roll - toes together,,quality
+Silver,Floor,,Candlestick - arms by ears,,quality
+Silver,Floor,,"Passe, chasse, plié",,quality
+Silver,Floor,,Handstand - 2 sec hold,2,sec
+Silver,Floor,,Forward roll - toes together,,quality
+Silver,Bars,,"Pull over - joined, stretched legs",,quality
+Silver,Bars,,Cast - shoulder level,,quality
+Silver,Bars,,Back hip circle - stretched body,,quality
+Silver,Bars,,Straddle sole circle dismount,,quality
+Silver,Vault,,Running drills,,time
+Silver,Vault,,Hurdle drills,,time
+Silver,Vault,,Stretch jump from spring board,,quality
+Silver,Vault,,Kick to handstand,,quality
+Silver,Vault,,Handstand flat back,,quality
+Silver,Vault,,Landings,10,sticks
+Silver,Beam,,Jump - front support mount,,quality
+Silver,Beam,,Needle kick,,quality
+Silver,Beam,,"Passe, plié, relevé - 10 sec balance",10,sec
+Silver,Beam,,"Stretch jump, arabesque",,quality
+Silver,Beam,,Cart wheel to side handstand dismount,,quality
+Gold,Floor,,Basic shapes,,quality
+Gold,Floor,,Forward roll (F-roll),,quality
+Gold,Floor,,Backward roll (B-roll),,quality
+Gold,Floor,,Basic shaped jumps (straight / star / tuck),,quality
+Gold,Floor,,Headstand / handstand hold,20,sec
+Gold,Floor,,Bridge,20,sec
+Gold,Floor,,Candlestick,20,sec
+Gold,Floor,,"Splits (middle, front both sides)",,quality
+Gold,Bars,,Long hang,20,sec
+Gold,Bars,,"Tuck, straddle, L-hang",10,sec
+Gold,Bars,,"Tuck, straddle, stride sole hangs",10,sec
+Gold,Bars,,Tummy roll (chin above the bar),,quality
+Gold,Bars,,Front support,20,sec
+Gold,Bars,,Chin-up hold,10,sec
+Gold,Vault,,Running drills - record best time,,time
+Gold,Vault,,Hurdle drills,,time
+Gold,Vault,,Straight jump,,quality
+Gold,Vault,,Star jump,,quality
+Gold,Vault,,Tuck jump,,quality
+Gold,Vault,,Landings,10,sticks
+Gold,Beam,,Front/back/stride support,,quality
+Gold,Beam,,F+B sideways walks,,quality
+Gold,Beam,,Pivot turn 1/2,,quality
+Gold,Beam,,"Passe, relevé crown, plié",,quality
+Gold,Beam,,"Stretch jump, arabesque",,quality
+Gold,Beam,,Cart wheel - side handstand 2 sec hold,2,sec
+Platinum,Floor,,Handstand roll out,,quality
+Platinum,Floor,,Chassé leap pass,,quality
+Platinum,Floor,,Stretch + split jump,,quality
+Platinum,Floor,,"Side split, passé - half turn",,quality
+Platinum,Floor,,Backward roll - 3/4 handstand,,quality
+Platinum,Bars,,Glide swing - pull up,,quality
+Platinum,Bars,,"Pull over - joined, stretched legs",,quality
+Platinum,Bars,,Cast - shoulder level,,quality
+Platinum,Bars,,Back hip circle - stretched body x2,,quality
+Platinum,Bars,,Front hip circle,,quality
+Platinum,Bars,,Squat on the bar - dismount,,quality
+Platinum,Vault,,Running & hurdle drills,,time
+Platinum,Vault,,Heel drive drills,,quality
+Platinum,Vault,,Jump to direct handstand,,quality
+Platinum,Vault,,Handstand pop-up,,quality
+Platinum,Vault,,Handstand spring on mat stack,,quality
+Platinum,Beam,,Handstand - 2 second hold,2,sec
+Platinum,Beam,,180° heel snap turn in passé,,quality
+Platinum,Beam,,"Stretched jumps x2, arabesque",,quality
+Platinum,Beam,,Leap jump,,quality
+Platinum,Beam,,Pivot turns x2,,quality
+Platinum,Beam,,Cart wheel - side handstand 1/4 turn,,quality
+Diamond,Floor,,Back walkover,,quality
+Diamond,Floor,,Front handspring step-out to cart wheel,,quality
+Diamond,Floor,,"Back extension roll, straight jump 180",,quality
+Diamond,Floor,,"Leap, straddle jump 120° leg separation",,quality
+Diamond,Floor,,"Splits, relevé 360° turn",,quality
+Diamond,Bars,,Straddle or pike glide kip,,quality
+Diamond,Bars,,"Squat onto low bar, jump to high bar",,quality
+Diamond,Bars,,Long hang kip,,quality
+Diamond,Bars,,Back hip circle to under-bars wing,,quality
+Diamond,Bars,,Tap swings x2,,quality
+Diamond,Bars,,Roundoff - back handsprings x2,,quality
+Diamond,Bars,,Tap swing with 180° turn dismount,,quality
+Diamond,Vault,,Running & hurdle drills,,time
+Diamond,Vault,,Heel drive drills,,quality
+Diamond,Vault,,Jump to angled handstand,,quality
+Diamond,Vault,,Handstand pop-up drills,,quality
+Diamond,Vault,,Handstand spring on the vault,,quality
+Diamond,Beam,,Cart wheel,,quality
+Diamond,Beam,,Stretched jump + split jump,,quality
+Diamond,Beam,,Handstand - 2 sec hold,2,sec
+Diamond,Beam,,Horizontal scale,,quality
+Diamond,Beam,,Straight leap 120° leg separation,,quality
+Diamond,Beam,,Cart wheel - side handstand 1/4 turn,,quality
+Sapphire,Floor,,Front tuck somersault or aerial cart wheel or front aerial,,quality
+Sapphire,Floor,,Stretch jump with a full turn,,quality
+Sapphire,Floor,,Front handspring step-out x2 into cart wheel into back extension roll,,quality
+Sapphire,Floor,,"Leap, straddle jump 120° leg separation",,quality
+Sapphire,Floor,,"Split, relevé 360° turn",,quality
+Sapphire,Floor,,Roundoff - back handspring - back tuck,,quality
+Sapphire,Bars,,"Glide kip, cast to horizontal",,quality
+Sapphire,Bars,,Clear hip circle + glide + kip,,quality
+Sapphire,Bars,,Cast + squat on + jump to high bar,,quality
+Sapphire,Bars,,Kip + cast,,quality
+Sapphire,Bars,,Long hang pull over / mini giant,,quality
+Sapphire,Bars,,Flyaway dismount tucked,,quality
+Sapphire,Vault,,Running & hurdle drills,,time
+Sapphire,Vault,,Jump to angled handstand,,quality
+Sapphire,Vault,,Back walkover or back handspring step out,,quality
+Sapphire,Vault,,Heel drive drills,,quality
+Sapphire,Vault,,Handstand pop-up drills,,quality
+Sapphire,Vault,,Handstand spring on the vault,,quality
+Sapphire,Beam,,"Full turn, leap 180°",,quality
+Sapphire,Beam,,Split jump + sissone / straight jump,,quality
+Sapphire,Beam,,Straight leap 120° leg separation,,quality
+Sapphire,Beam,,Cart wheel - straight jump,,quality
+Sapphire,Beam,,Back tuck dismount,,quality

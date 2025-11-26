@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wild Robot — Gymnastics Player Evaluation</title>
+
+  <!-- ملف الستايل الخارجي -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- مكتبة تصدير الـ PDF (هنستخدمها في app.js) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+    integrity="sha512-YcsIP+Zrj9DqAtC0pVqA9eql6JqS+7zYkVcG9r1LxF8N+Wg7H9qL9T1+nx+JrqR6cV5bWQe2sZq8q1Qp+4qkQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer">
+    </script>
+</head>
+
+<body>
+  <div class="app" id="app">
+    <!-- ========== HEADER ========== -->
+    <header>
+      <div class="bar">
+        <button class="back" id="backBtn" type="button">⬅</button>
+        <div class="title" id="headerTitle">Branches</div>
+        <button class="btn small ghost" id="shareBtn" type="button" style="visibility:hidden;">
+          Share
+        </button>
+      </div>
+    </header>
+
+    <!-- ========== MAIN ========== -->
+    <main>
+      <!-- ===== 1) HOME — BRANCHES ===== -->
+      <section class="view active" id="view-home">
+        <h2>Branches</h2>
+        <div class="list" id="branchesList"></div>
+
+        <div class="card card-inline">
+          <div class="muted small">Add a new empty branch</div>
+          <button class="btn small ghost" id="addBranchBtn" type="button">+ Add Branch</button>
+        </div>
+      </section>
+
+      <!-- ===== 2) SESSIONS PICKER ===== -->
+      <section class="view" id="view-sessions">
+        <h2>Sessions</h2>
+        <div class="muted small" id="sessionsBranchLabel"></div>
+        <div class="list" id="sessionsList"></div>
+
+        <div class="card card-inline">
+          <div class="muted small">Quick add a session (e.g. 5-6)</div>
+          <button class="btn small ghost" id="addSessionBtn" type="button">+ Add Session</button>
+        </div>
+      </section>
+
+      <!-- ===== 3) ROSTER PER SESSION ===== -->
+      <section class="view" id="view-roster">
+        <h2 id="rosterTitle">Roster</h2>
+        <div class="row row-header">
+          <div class="muted small" id="rosterBranchLabel"></div>
+          <button class="btn small ghost" id="addPlayerBtn" type="button">+ Add Player</button>
+        </div>
+        <div class="list" id="rosterList"></div>
+      </section>
+
+      <!-- ===== 4) EVALUATION (SKILLS + ROUTINE) ===== -->
+      <section class="view" id="view-eval">
+        <!-- Player header -->
+        <div class="card">
+          <div class="row row-header">
+            <div class="left">
+              <div class="avatar">🤖</div>
+              <div>
+                <div class="strong" id="playerName">Player</div>
+                <div class="muted small" id="playerMetaSmall">
+                  Gymnastics · Level · Age
+                </div>
+              </div>
+            </div>
+            <div class="left">
+              <div class="stars big" id="overallStars"></div>
+              <div class="strong" id="overallLabel">0.00/5.00</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tabs: Skills vs Routine (10/10) -->
+        <div class="tabs-inline" id="evalTabs">
+          <button class="tab-pill tab-pill-active" id="tabSkills" type="button">
+            Skills (5★)
+          </button>
+          <button class="tab-pill" id="tabRoutine" type="button">
+            Routine (10/10)
+          </button>
+        </div>
+
+        <!-- === Skills pane === -->
+        <div id="skillsPane">
+          <h3>Evaluation by Apparatus</h3>
+          <div class="muted small" style="margin-bottom:6px;">
+            Each apparatus (Floor, Bars, Beam, Vault) has its own Skill Path.
+            Use the ★ button next to a skill to include it in that apparatus path.
+            Dot color shows readiness: Green = ready, Yellow = needs focus,
+            Red = needs spot, Grey = not started.
+          </div>
+
+          <!-- الأجهزة + مهاراتها + Skill Path لكل جهاز (JS هيبني كل حاجة هنا) -->
+          <div id="devicesRoot"></div>
+
+          <!-- Totals -->
+          <div class="card">
+            <div class="row row-header">
+              <div class="strong">Total Stars</div>
+              <div class="strong">
+                <span id="totalStars">0</span>
+                /
+                <span id="maxStars">0</span>
+              </div>
+            </div>
+
+            <div class="progress">
+              <div class="bar" id="progressBar"></div>
+            </div>
+
+            <div class="row row-header small-gap">
+              <div>
+                <span class="muted small">Percent</span>
+                <span class="strong" id="percentLabel">0%</span>
+              </div>
+              <div>
+                <span class="muted small">Prestige Level</span>
+                <span class="pill" id="promoBadge">Needs Improvement</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div class="row row-actions">
+            <button class="btn primary" id="saveNextBtn" type="button">
+              Save + Next Player
+            </button>
+            <button class="btn ghost" id="saveBtn" type="button">
+              Save
+            </button>
+            <button class="btn ghost" id="reportBtn" type="button">
+              Player Report
+            </button>
+          </div>
+        </div>
+
+        <!-- === Routine pane (10/10) === -->
+        <div id="routinePane" class="hidden-pane">
+          <h3>Competition Routine (10/10)</h3>
+
+          <div class="card">
+            <div class="row row-header">
+              <div>
+                <div class="strong">Routine Stars</div>
+                <div class="muted small">
+                  Overall routine quality (0–10)
+                </div>
+              </div>
+              <div class="stars big" id="routineStarsContainer">
+                <!-- JS هيحط النجوم هنا -->
+              </div>
+            </div>
+
+            <div class="row row-header small-gap">
+              <div>
+                <span class="muted small">Routine Score</span>
+                <span class="strong" id="routineScoreLabel">0 / 10</span>
+              </div>
+              <div>
+                <span class="muted small">Ready for competition?</span>
+                <button class="btn tiny" type="button" id="routineCompetingToggle" data-active="false">
+                  Not selected
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Skill Path bar for routine -->
+          <div class="card">
+            <div class="strong small-title">Routine Skill Path</div>
+            <div class="muted small">
+              Red point = coach must spot / support this skill during competition.
+            </div>
+
+            <div class="skill-path-bar">
+              <div class="skill-path-bar__fill" id="routinePathFill"></div>
+              <!-- نقاط (skills) هيتم التحكم فيها بالـ JS -->
+              <div class="skill-path-dot skill-path-dot--green" data-index="0"></div>
+              <div class="skill-path-dot skill-path-dot--green" data-index="1"></div>
+              <div class="skill-path-dot skill-path-dot--yellow" data-index="2"></div>
+              <div class="skill-path-dot skill-path-dot--red" data-index="3"></div>
+              <div class="skill-path-dot skill-path-dot--grey" data-index="4"></div>
+              <div class="skill-path-dot skill-path-dot--grey" data-index="5"></div>
+            </div>
+
+            <div class="muted small">
+              Tap a dot (in future من خلال الـ JS) لتحديد المهارة اللي محتاجة دعم / تركيز.
+            </div>
+          </div>
+
+          <!-- Routine notes -->
+          <div class="card">
+            <div class="strong small-title">Routine Notes</div>
+            <textarea id="routineNotes" rows="3" class="notes-textarea"
+              placeholder="Notes about routine, music timing, landing, expression..."></textarea>
+          </div>
+
+          <!-- Actions (نفس أزرار الـ Skills) -->
+          <div class="row row-actions">
+            <button class="btn primary" id="saveNextRoutineBtn" type="button">
+              Save + Next Player
+            </button>
+            <button class="btn ghost" id="saveRoutineBtn" type="button">
+              Save Routine Only
+            </button>
+            <button class="btn ghost" id="backToSkillsBtn" type="button">
+              Back to Skills
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== 5) PLAYER REPORT VIEW (مع navigation لكل اللاعبين) ===== -->
+      <section class="view" id="view-report-player">
+        <h2>Player Report</h2>
+
+        <!-- قائمة كل التقارير المحفوظة -->
+        <div class="card" id="reportNavCard">
+          <div class="strong">Saved Reports</div>
+          <div class="muted small">
+            Select a player report to open / edit / share.
+          </div>
+          <div class="list" id="reportNavList">
+            <!-- JS هيحط هنا كل اللاعبين اللي اتعمل لهم Save -->
+          </div>
+        </div>
+
+        <!-- الكارت الرئيسي لتقرير اللاعب الحالي -->
+        <div class="card" id="reportPlayerCard">
+          <!-- JS هيحقن المحتوى هنا (اسم اللاعب، الأجهزة، النجوم، النسبة، مستوى البرستيج...) -->
+        </div>
+
+        <!-- Hidden printable layout for PDF (plain text + unicode stars) -->
+        <div id="reportPdf" class="pdf-root" aria-hidden="true"></div>
+
+        <div class="row row-actions">
+          <button class="btn primary" id="genPdfBtn" type="button">Export PDF</button>
+          <button class="btn ghost" id="copyLinkBtn" type="button">Copy Link</button>
+          <button class="btn ghost" id="shareReportBtn" type="button">Share</button>
+        </div>
+      </section>
+
+      <!-- ===== 6) SESSION SUMMARY ===== -->
+      <section class="view" id="view-session-summary">
+        <h2>Session Summary</h2>
+        <div class="list" id="sessionSummaryList"></div>
+      </section>
+    </main>
+
+    <!-- ========== FOOTER TABS ========== -->
+    <footer>
+      <nav class="tabs">
+        <button class="tab active" data-nav="home" type="button">
+          <span>🏠</span>
+          <span>Home</span>
+        </button>
+        <button class="tab" data-nav="sessions" type="button">
+          <span>🕒</span>
+          <span>Sessions</span>
+        </button>
+        <button class="tab" data-nav="session-summary" type="button">
+          <span>📊</span>
+          <span>Summary</span>
+        </button>
+        <button class="tab" data-nav="report-player" type="button">
+          <span>📄</span>
+          <span>Report</span>
+        </button>
+      </nav>
+    </footer>
+
+    <!-- ========== SHARE OVERLAY ========== -->
+    <div class="overlay" id="shareOverlay">
+      <div class="sheet">
+        <div class="sheet-header">
+          <h3>Share Report</h3>
+          <button class="btn small ghost" id="shareClose" type="button">Close</button>
+        </div>
+        <div class="divider"></div>
+        <div class="list">
+          <button class="row row-clickable" data-share="whatsapp" type="button">
+            <span>📱 WhatsApp</span>
+            <span class="muted small">Send report link</span>
+          </button>
+          <button class="row row-clickable" data-share="email" type="button">
+            <span>✉️ Email</span>
+            <span class="muted small">Send link</span>
+          </button>
+          <button class="row row-clickable" data-share="copy" type="button">
+            <span>🔗 Copy Link</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== ADD PLAYER OVERLAY ========== -->
+    <div class="overlay" id="playerOverlay">
+      <div class="sheet">
+        <div class="sheet-header">
+          <h3>Add Player</h3>
+          <button class="btn small ghost" id="playerClose" type="button">Close</button>
+        </div>
+        <div class="divider"></div>
+        <form id="playerForm" class="form-vertical">
+          <label class="field">
+            <span class="field-label">Player name</span>
+            <input id="playerNameInput" type="text" required />
+          </label>
+
+          <label class="field">
+            <span class="field-label">Age</span>
+            <input id="playerAgeInput" type="number" min="3" max="18" required />
+          </label>
+
+          <label class="field">
+            <span class="field-label">Level (Gymnastics)</span>
+            <select id="playerLevelInput" required>
+              <option value="">Choose level</option>
+              <option value="Recreational">Recreational</option>
+              <option value="1">Level 1</option>
+              <option value="2">Level 2</option>
+              <option value="3">Level 3</option>
+              <option value="4">Level 4</option>
+              <option value="5">Level 5</option>
+              <option value="6">Level 6</option>
+              <option value="7">Level 7</option>
+              <option value="8">Level 8</option>
+              <option value="9">Level 9</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span class="field-label">Sport</span>
+            <!-- حاليًا ثابتة Gymnastics لحد ما نضيف باقي الرياضات -->
+            <input id="playerSportInput" type="text" value="Gymnastics" disabled />
+          </label>
+
+          <button class="btn primary full" type="submit">Add Player</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- ========== SKILL VIDEO OVERLAY ========== -->
+    <div class="overlay" id="videoOverlay">
+      <div class="sheet">
+        <div class="sheet-header">
+          <h3>Skill Video</h3>
+          <button class="btn small ghost" id="videoClose" type="button">Close</button>
+        </div>
+        <div class="divider"></div>
+        <div class="form-vertical">
+          <div class="field">
+            <span class="field-label">Skill</span>
+            <div class="muted small" id="videoSkillLabel"></div>
+          </div>
+          <label class="field">
+            <span class="field-label">Video URL</span>
+            <input id="videoUrlInput" type="url" placeholder="https://..." />
+          </label>
+          <button class="btn primary full" id="videoSaveBtn" type="button">
+            Save Video
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== ROBOT GUIDE ========== -->
+    <div class="guide" id="guide">
+      <img id="guideImg" src="./logos/point.png" alt="Wild Robot" loading="lazy"
+        onerror="this.src='https://dummyimage.com/256x256/e2e8f0/111&text=Robot';" />
+      <div class="bubble" id="guideBubble">
+        Hi! I'm the Wild Robot assistant. I'll guide you step by step.
+      </div>
+    </div>
+  </div>
+
+  <!-- Supabase client + app.js -->
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+  <script>
+    const SUPABASE_URL = "https://tbdpsoawhlbmqmetjtlr.supabase.co";
+    const SUPABASE_ANON_KEY =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRiZHBzb2F3aGxibXFtZXRqdGxyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA1MzIyOTEsImV4cCI6MjA3NjEwODI5MX0.xYyrfIuzR3p8qBOHL0bPGQ21ay57i_bA5CGlpDyJR04";
+
+    window.supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  </script>
+  <!-- Service to load players -->
+  <script src="supabase-service.js"></script>
+  <!-- ملف الجافاسكربت الرئيسي -->
+  <script src="app.js"></script>
+</body>
+
+</html>
